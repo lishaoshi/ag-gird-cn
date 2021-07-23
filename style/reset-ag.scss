@@ -1,0 +1,58 @@
+.ag-theme-alpine::v-deep {
+  .ag-cell {
+    padding-left: 3px;
+    padding-right: 3px;
+    height: 30px;
+  }
+
+  .ag-cell-wrapper>*:not(.ag-cell-value):not(.ag-group-value) {
+    height: 30px;
+  }
+
+  .ag-header-cell-resize::after {
+    height: 100%;
+    top: 0;
+    width: 1px;
+    background-color: #bdc3c7;
+
+    // display: none;
+  }
+
+  .ag-header-group-cell {
+    // border-right: 1px solid #bdc3c7;
+
+    .ag-header-group-cell-label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+    }
+  }
+
+  .ag-cell-range-selected {
+    border-right-color: #2196f3 !important;
+  }
+
+  .ag-ltr {
+    .ag-cell {
+      border-right: 1px solid #dde2eb;
+      line-height: 30px;
+    }
+  }
+
+  .ag-header-cell::after {
+    height: 100%;
+    top: 0;
+    background-color: transparent;
+  }
+
+  .ag-cell-inline-editing {
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ag-picker-field-wrapper {
+    border-radius: 0 !important;
+  }
+}
