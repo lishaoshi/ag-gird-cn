@@ -116,7 +116,7 @@ export default {
             resizable: true,
             cellStyle: { lineHeight: 30 + 'px' },
             resizable: true,
-            flex: 1
+            flex: 2
         };
 
         this.defaultColGroupDef = { marryChildren: true };
