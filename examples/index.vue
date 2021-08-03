@@ -3,11 +3,12 @@
         <ag-grid-cn
             v-model="rowData"
             :columns="columnDefs"
-            :defaultColDef="defaultColDef"
+            :default-col-def="defaultColDef"
             :defaultColGroupDef="defaultColGroupDef"
             :columnTypes="columnTypes"
             :frameworkComponents="frameworkComponents"
             :autoHeight="true"
+            border
             domLayout="autoHeight"
             @gridRead="onGridReady"
         ></ag-grid-cn>
@@ -62,50 +63,50 @@ export default {
                 field: 'ciqCode',
                 // type: 'rightAligned',
             },
-            {
-                headerName: '企业中文名称',
-                field: 'name',
-                // type: 'rightAligned',
-            },
-            {
-                headerName: '组织机构代码',
-                field: 'orgCode',
-                // type: 'rightAligned',
-            },
-            {
-                headerName: '检验检疫中文名称',
-                field: 'ciqName',
-                // type: 'rightAligned',
-            },
-            {
-                headerName: '创建人',
-                field: 'createdBy',
-                // type: 'rightAligned',
-            },
-            {
-                headerName: '创建时间',
-                field: 'createdAt',
-                type: ['dateColumn', 'nonEditableColumn'],
+            // {
+            //     headerName: '企业中文名称',
+            //     field: 'name',
+            //     // type: 'rightAligned',
+            // },
+            // {
+            //     headerName: '组织机构代码',
+            //     field: 'orgCode',
+            //     // type: 'rightAligned',
+            // },
+            // {
+            //     headerName: '检验检疫中文名称',
+            //     field: 'ciqName',
+            //     // type: 'rightAligned',
+            // },
+            // {
+            //     headerName: '创建人',
+            //     field: 'createdBy',
+            //     // type: 'rightAligned',
+            // },
+            // {
+            //     headerName: '创建时间',
+            //     field: 'createdAt',
+            //     type: ['dateColumn', 'nonEditableColumn'],
 
-            },
-            {
-                headerName: '修改人',
-                field: 'updatedBy',
-            },
-            {
-                headerName: '修改时间',
-                field: 'updatedAt',
-                type: ['dateColumn', 'nonEditableColumn'],
-            },
-            {
-                headerName: '操作',
-                filter: false,
-                editable: false,
-                checkboxSelection: false,
-                menuTabs: 'columnsMenuTab',
-                cellRenderer: 'elbutton',
-                pinned: 'right'
-            }
+            // },
+            // {
+            //     headerName: '修改人',
+            //     field: 'updatedBy',
+            // },
+            // {
+            //     headerName: '修改时间',
+            //     field: 'updatedAt',
+            //     type: ['dateColumn', 'nonEditableColumn'],
+            // },
+            // {
+            //     headerName: '操作',
+            //     filter: false,
+            //     editable: false,
+            //     checkboxSelection: false,
+            //     menuTabs: 'columnsMenuTab',
+            //     cellRenderer: 'elbutton',
+            //     pinned: 'right'
+            // }
         ];
 
         this.defaultColDef = {
@@ -113,6 +114,9 @@ export default {
             floatingFilter: true,
             filter: 'agTextColumnFilter',
             resizable: true,
+            cellStyle: { lineHeight: 30 + 'px' },
+            resizable: true,
+            flex: 1
         };
 
         this.defaultColGroupDef = { marryChildren: true };

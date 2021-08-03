@@ -14,6 +14,9 @@
         :enable-fill-handle="true"
         :dom-layout="domLayout"
         :header-height="headerHeight"
+        :class="{
+            'ag-grid--border': border
+        }"
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @filter-modified="filterModified"

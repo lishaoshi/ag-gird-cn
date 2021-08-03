@@ -54,6 +54,9 @@ module.exports  = {
       '@': path.resolve(__dirname, '../src')
     }
   },
+  optimization: {
+    minimize: true
+  },
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin()

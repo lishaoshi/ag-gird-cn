@@ -7,6 +7,7 @@ import "../node_modules/@ag-grid-community/core/dist/styles/ag-theme-alpine.css"
 import "../style/reset-ag.scss"
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
+import '../src/style/grid.scss'
 
 
 Vue.use(ElementUI, { size: 'mini', stripe: true })

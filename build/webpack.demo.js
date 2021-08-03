@@ -3,6 +3,8 @@ const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+
 
 module.exports  = {
   mode: 'development',
@@ -58,6 +60,9 @@ module.exports  = {
       '@': path.resolve(__dirname, '../src')
     }
   },
+  optimization: {
+    minimize: false
+  },
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin(
@@ -65,6 +70,10 @@ module.exports  = {
         title: 'ag-table',
         template: './template/index.html'
       }
-    )
+    ),
+    new BundleAnalyzerPlugin({
+      analyzerPort: 8089,
+      openAnalyzer: true
+    })
   ]
 }

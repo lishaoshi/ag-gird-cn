@@ -1,6 +1,11 @@
 @import 'mixins/mixins.scss';
 
 
-@include b(gird) {
-
+@include b(theme-alpine) {
+  .ag-grid--border {
+    .ag-header-cell {
+      border-right: 1px solid #bdc3c7;
+      background: red;
+    }
+  }
 }
