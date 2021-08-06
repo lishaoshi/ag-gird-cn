@@ -86,13 +86,12 @@ export default {
 </script>
 
 <style lang="scss">
-.ag-group {
-  &.ag-theme-alpine{
-    background: red;
-      .ag-cell-wrapper > *:not(.ag-cell-value):not(.ag-group-value) {
-          height: 30px !important;
-    }
-  }
-}
+// .ag-group {
+//   &.ag-theme-alpine{
+//     .ag-cell-wrapper > *:not(.ag-cell-value):not(.ag-group-value) {
+//         height: 30px !important;
+//     }
+//   }
+// }
 
 </style>

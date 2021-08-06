@@ -1,7 +1,7 @@
 <template>
     <ag-grid-vue
         row-selection="multiple"
-        class="flex-grow-1 flex-shrink-1 ag-theme-alpine"
+        class="flex-grow-1 flex-shrink-1 ag-theme-balham"
         :modules="modules"
         :column-defs="columns"
         :default-col-group-def="defaultColGroupDef"
