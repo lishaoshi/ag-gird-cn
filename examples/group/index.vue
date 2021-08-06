@@ -70,6 +70,7 @@ export default {
   },
   methods: {
      onGridReady(params) {
+       debugger
       const updateData = (data) => {
         this.data = data;
       };

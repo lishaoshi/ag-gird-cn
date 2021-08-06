@@ -1,1 +1,1 @@
-.ag-theme-alpine .ag-cell:not(:last-child),.ag-theme-alpine .ag-header-cell:not(:last-child),.ag-theme-alpine .ag-grid--border .ag-cell:not(:last-child),.ag-theme-alpine .ag-grid--border .ag-header-cell:not(:last-child),.ag-theme-alpine .ag-ltr .ag-cell:not(:last-child),.ag-theme-alpine .ag-ltr .ag-header-cell:not(:last-child){border-right:1px solid #bdc3c7}
+.ag-theme-alpine.ag-grid--border .ag-ltr .ag-cell:not(:last-child),.ag-theme-alpine.ag-grid--border .ag-header-cell:not(:last-child){border-right:1px solid #bdc3c7}
