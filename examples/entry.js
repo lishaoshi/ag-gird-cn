@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './router.config'
 import APP from './app.vue'
-import "../node_modules/@ag-grid-community/core/dist/styles/ag-grid.css";
-import "../node_modules/@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
+import "@ag-grid-community/core/dist/styles/ag-grid.css";
+import "@ag-grid-community/core/dist/styles/ag-theme-balham.css";
 import "../style/reset-ag.scss"
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
