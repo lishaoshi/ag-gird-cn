@@ -58,7 +58,6 @@ export default {
             type: Object,
             default: () => {
                 return {
-                    cellStyle: { lineHeight: 30 + 'px' },
                     resizable: false,
                     flex: 1
                 }
