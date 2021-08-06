@@ -17,6 +17,11 @@
         :class="{
             'ag-grid--border': border
         }"
+        :masterDetail="masterDetail"
+        :detailCellRendererParams="detailCellRendererParams"
+        :detailRowHeight="detailRowHeight"
+        :detailRowAutoHeight="detailRowAutoHeight"
+        :isRowMaster="isRowMaster"
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @filter-modified="filterModified"
@@ -54,7 +59,8 @@ export default {
             default: () => {
                 return {
                     cellStyle: { lineHeight: 30 + 'px' },
-                    resizable: true
+                    resizable: false,
+                    flex: 1
                 }
             }
         },
@@ -81,6 +87,26 @@ export default {
         border: {
             type: Boolean,
             default: false
+        },
+        masterDetail: {
+            type: Boolean,
+            default: false
+        },
+        detailCellRendererParams: {
+            type: Object,
+            default: () => null
+        },
+        detailRowHeight: {
+            type: Number,
+            default: 300
+        },
+        detailRowAutoHeight: {
+            type: Boolean,
+            default: false
+        },
+        isRowMaster: {
+            type: Function,
+            default: null
         }
     },
     watch: {
@@ -98,7 +124,7 @@ export default {
     },
     methods: {
         onGridReady(even) {
-          this.$emit('gridRead', even)
+          this.$emit('gridReady', even)
         },
         columnMoved(event) {
             this.$emit('columnMoved', event)
@@ -110,3 +136,4 @@ export default {
 
 }
 </script>
+

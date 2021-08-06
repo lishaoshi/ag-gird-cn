@@ -8,5 +8,9 @@ export default [
   {
     path: '/edit',
     component: () => import('../examples/edit/index')
+  },
+  {
+    path: '/group',
+    component: () => import('./group/index.vue')
   }
 ]

@@ -8,11 +8,14 @@ import "../style/reset-ag.scss"
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import '../src/style/index.scss'
+import AgGridCn from '@/components/ag-grid-cn.vue'
 
 
 Vue.use(ElementUI, { size: 'mini', stripe: true })
 
 Vue.use(VueRouter)
+
+Vue.component('AgGridCn', AgGridCn)
 
 
 const router = new VueRouter({
