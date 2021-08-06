@@ -4,8 +4,8 @@
     v-model="data"
     :columns="columns"
     :masterDetail="true"
-    :detailCellRendererParams="detailCellRendererParams"
     :isRowMaster="isRowMaster"
+    :detailCellRendererParams="detailCellRendererParams"
     @gridReady="onGridReady"
   ></ag-grid-cn>
 </template>
@@ -70,7 +70,6 @@ export default {
   },
   methods: {
      onGridReady(params) {
-       debugger
       const updateData = (data) => {
         this.data = data;
       };
