@@ -27,6 +27,7 @@
         @filter-modified="filterModified"
         @cellClicked="cellClicked"
         @cellDoubleClicked="cellDoubleClicked"
+        @cellEditingStarted="cellEditingStarted"
     >
     </ag-grid-vue>
 </template>
@@ -138,6 +139,9 @@ export default {
         },
         cellDoubleClicked(params) {
             this.$emit('cellDoubleClicked', params)
+        },
+        cellEditingStarted(params) {
+            this.$emit('cellEditingStarted', params)
         }
     }
 

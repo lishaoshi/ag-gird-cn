@@ -8,6 +8,7 @@
             :frameworkComponents="frameworkComponents"
             rowHeight="30"
             @gridReady="onGridReady"
+            @cellEditingStarted="cellEditingStarted"
         ></ag-grid-cn>
     </div>
 </template>
@@ -49,7 +50,8 @@ export default {
             {
                 headerName: '船次号',
                 width: 120,
-                field: 'voyageNo'
+                field: 'voyageNo',
+                editable: true
             },
             {
                 headerName: 'IMO号',
@@ -166,6 +168,9 @@ export default {
         },
         filterModified() {
             // this.gridApi.setRowData([{"id":"1904","shipName":"APL TURKEY","shipNameCh":"美总土耳其","agencyNameEng":null,"agency":"俊励","voyageNo":"0GX1HE1MA","imo":"UN9532771","location":"YICT","shipStatus":"PUBLISH","impVoyno":"0GX1HE1MAI","dischargePort":null,"estimateArrivalDate":1627585200000,"cutoffDate":1627498800000,"dataPlatCode":"SASASZ","createdAt":1626717655000,"createdBy":"SYSTEM","lastUpdatedAt":null,"lastUpdatedBy":null}])
+        },
+        cellEditingStarted(params) {
+            this.gridApi.stopEditing()
         }
     }
 
