@@ -28,6 +28,7 @@
         @cellClicked="cellClicked"
         @cellDoubleClicked="cellDoubleClicked"
         @cellEditingStarted="cellEditingStarted"
+        @cellEditingStopped="cellEditingStopped"
     >
     </ag-grid-vue>
 </template>
@@ -142,6 +143,9 @@ export default {
         },
         cellEditingStarted(params) {
             this.$emit('cellEditingStarted', params)
+        },
+        cellEditingStopped(params) {
+            this.$emit('cellEditingStopped', params)
         }
     }
 
