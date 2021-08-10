@@ -1,6 +1,6 @@
 {
   "name": "ag-grid-ybg",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A table component for ag-grid",
   "main": "dist/main.js",
   "scripts": {
