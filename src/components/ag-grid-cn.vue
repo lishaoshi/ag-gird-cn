@@ -25,6 +25,8 @@
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @filter-modified="filterModified"
+        @cellClicked="cellClicked"
+        @cellDoubleClicked="cellDoubleClicked"
     >
     </ag-grid-vue>
 </template>
@@ -130,6 +132,12 @@ export default {
         },
         filterModified(params) {
             this.$emit('filterModified', params)
+        },
+        cellClicked(params) {
+            this.$emit('cellClicked', params)
+        },
+        cellDoubleClicked(params) {
+            this.$emit('cellDoubleClicked', params)
         }
     }
 

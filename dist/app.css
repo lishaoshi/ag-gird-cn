@@ -5896,4 +5896,4 @@ ag-grid, ag-grid-angular, ag-grid-ng2, ag-grid-polymer, ag-grid-aurelia {
     margin-bottom: 6px; }
 
 
-.ag-theme-alpine.ag-grid--border .ag-ltr .ag-cell:not(:last-child),.ag-theme-alpine.ag-grid--border .ag-header-cell:not(:last-child){border-right:1px solid #bdc3c7}
+.ag-theme-balham.ag-grid--border .ag-ltr .ag-cell:not(:last-child),.ag-theme-balham.ag-grid--border .ag-header-cell:not(:last-child){border-right:1px solid #bdc3c7}

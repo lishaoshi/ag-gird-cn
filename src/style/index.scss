@@ -3,7 +3,7 @@
 @import "@ag-grid-community/core/dist/styles/ag-theme-balham.css";
 
 
-@include b(theme-alpine) {
+@include b(theme-balham) {
   &.ag-grid--border {
     .ag-ltr .ag-cell, .ag-header-cell {
       &:not(:last-child) {
