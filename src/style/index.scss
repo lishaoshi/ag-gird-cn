@@ -11,5 +11,52 @@
       }
     }
   }
-}
+  .ag-cell {
+    padding-left:3px;
+    padding-right:3px;
+  }
+  .ag-row-focus{
+    background-color: #FFEFBB !important;
+  }
 
+  .ag-ltr {
+    .ag-cell {
+      border-right: 1px solid #bdc3c7;
+    }
+  }
+
+  .ag-header-cell::after,.ag-header-group-cell::after{
+    height: 100% !important;
+    top: 0 !important;
+  }
+
+  .ag-header-cell::after{
+    background-color: transparent;
+  }
+
+  .ag-header-cell-text,.ag-header-group-text{
+    width:100% !important;
+    text-align: center !important;
+  }
+  
+  .ag-header-cell {
+    border-right: 1px solid #bdc3c7;
+  }
+
+  .ag-cell-inline-editing{
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ag-picker-field-wrapper{
+    border-radius: 0;
+  }
+
+  .ag-cell-focus, .ag-cell-range-selected{
+    border-right: 1px solid #0091ea !important;
+  }
+  .ag-cell .el-button--mini {
+    padding: 5px !important;
+  }
+}
