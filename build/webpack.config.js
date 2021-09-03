@@ -5,13 +5,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports  = {
   mode: 'production',
-  entry: {
-    app: ['./src/index.js']
-  },
+  entry: './src/index.js',
   output: {
     path: path.resolve(process.cwd(), 'dist'),
     // path: path.join(process.cwd(), 'dist1'),
-    filename: 'main.js',
+    filename: 'main.[name].js',
     publicPath: '',
     libraryTarget: 'umd'
     // filename: '[name].[hash:7].js',
@@ -54,8 +52,12 @@ module.exports  = {
       '@': path.resolve(__dirname, '../src')
     }
   },
+  devtool: false,
   optimization: {
-    minimize: true
+    minimize: true,
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   plugins: [
     new VueLoaderPlugin(),
