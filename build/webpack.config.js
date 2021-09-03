@@ -53,12 +53,6 @@ module.exports  = {
     }
   },
   devtool: false,
-  optimization: {
-    minimize: true,
-    splitChunks: {
-      chunks: 'all'
-    }
-  },
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin()
