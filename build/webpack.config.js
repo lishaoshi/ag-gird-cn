@@ -9,7 +9,7 @@ module.exports  = {
   output: {
     path: path.resolve(process.cwd(), 'dist'),
     // path: path.join(process.cwd(), 'dist1'),
-    filename: 'main.[name].js',
+    filename: '[name].js',
     publicPath: '',
     libraryTarget: 'umd'
     // filename: '[name].[hash:7].js',
