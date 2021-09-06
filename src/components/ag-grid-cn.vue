@@ -2,6 +2,7 @@
     <ag-grid-vue
         row-selection="multiple"
         class="flex-grow-1 flex-shrink-1 ag-theme-balham"
+        style="width: 100%; height: 100%;"
         :modules="modules"
         :column-defs="columns"
         :default-col-group-def="defaultColGroupDef"
@@ -17,6 +18,7 @@
         :class="{
             'ag-grid--border': border
         }"
+        :rowBuffer="rowBuffer"
         :masterDetail="masterDetail"
         :detailCellRendererParams="detailCellRendererParams"
         :detailRowHeight="detailRowHeight"
@@ -113,6 +115,10 @@ export default {
         isRowMaster: {
             type: Function,
             default: null
+        },
+        rowBuffer: {
+            type: Number,
+            default: 10
         }
     },
     watch: {
@@ -125,7 +131,7 @@ export default {
             agGirdLocal,
             columnDefs: null,
             rowData: null,
-            modules: AllModules,
+            modules: AllModules
         }
     },
     methods: {
