@@ -1,12 +1,16 @@
 <template>
     <div class="page">
+        <PrintButton :gridApi="gridApi" :columnApi="columnApi" :pageSize="'A3'" />
+        <el-button @click="exportPdf">打印</el-button>
         <ag-grid-cn
+            ref="grid"
             v-model="rowData"
             :columns="columnDefs"
             :defaultColGroupDef="defaultColGroupDef"
             :columnTypes="columnTypes"
             :frameworkComponents="frameworkComponents"
             :rowBuffer="0"
+            :pdfSetting="pdfSetting"
             rowHeight="30"
             domLayout="normal"
             @gridReady="onGridReady"
@@ -17,6 +21,7 @@
 
 <script>
 import AgGridCn from '@/components/ag-grid-cn'
+import PrintButton from '@/pdfPrint/print-button.vue'
 import { Button } from 'element-ui'
 import Operation from '../operation'
 // console.log(Button)
@@ -24,7 +29,8 @@ export default {
     name: 'AgGrid',
     components: {
         AgGridCn,
-        Button
+        Button,
+        PrintButton
     },
     data() {
         return {
@@ -35,7 +41,12 @@ export default {
             },
             defaultColDef: {},
             columnTypes: null,
-            frameworkComponents: {}
+            frameworkComponents: {},
+            gridApi: null,
+            columnApi: null,
+            pdfSetting: {
+                pageSize: 'A3'
+            }
         }
     },
     beforeMount() {
@@ -100,7 +111,16 @@ export default {
             },
             {
                 headerName: '码头',
-                field: 'location'
+                field: 'location',
+                pdfExportOptions: {
+                    styles: {
+                        background: '#98D1EA',
+                        fontSize: 12,
+                        bold: true,
+                        color: '#DE0707',
+                        alignment: 'left' | 'center' | 'right',
+                    }
+                }
             },
             {
                 headerName: '操作',
@@ -109,7 +129,10 @@ export default {
                 checkboxSelection: false,
                 menuTabs: 'columnsMenuTab',
                 cellRenderer: 'elbutton',
-                pinned: 'right'
+                pinned: 'right',
+                pdfExportOptions: {
+                    skipColumn: true
+                }
             }
         ];
 
@@ -187,6 +210,9 @@ export default {
         },
         cellEditingStarted(params) {
             this.gridApi.stopEditing()
+        },
+        exportPdf() {
+            this.$refs.grid.exportPdf()
         }
     }
 

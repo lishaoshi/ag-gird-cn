@@ -1,6 +1,6 @@
 
 import AgfridCn from './components/ag-grid-cn'
-
+import PrintButton from './pdfPrint/print-button'
 import './style/index.scss'
 
 
@@ -13,7 +13,9 @@ const  install = (Vue) => {
     Vue.component(component.name, component);
   });
 }
-
+export {
+  PrintButton
+}
 export default {
   install,
   AgfridCn
