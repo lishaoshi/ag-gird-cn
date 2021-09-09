@@ -47,7 +47,7 @@ import { AllModules } from '@ag-grid-enterprise/all-modules'
 import { agGirdLocal } from '@/utils/reset-ag-grid-local.js'
 import { LicenseManager } from '@ag-grid-enterprise/core'
 LicenseManager.setLicenseKey(`CompanyName=Shenzhen Huitongguan Network Technology Co., Ltd,LicensedGroup=Shenzhen Huitongguan Network Technology Co., Ltd,LicenseType=MultipleApplications,LicensedConcurrentDeveloperCount=1,LicensedProductionInstancesCount=1,AssetReference=AG-017061,ExpiryDate=5_July_2022_[v2]_MTY1Njk3NTYwMDAwMA==7d62b8378360a3402254d4cd22f59109`)
-
+import printDoc from '../pdfPrint/printDoc'
 export default {
     name: 'AgGridCn',
     components: {
@@ -126,6 +126,10 @@ export default {
         excelStyles: {
             type: Object,
             default: null
+        },
+        pdfSetting: {
+            type: Object,
+            default: null
         }
     },
     watch: {
@@ -140,11 +144,34 @@ export default {
             rowData: null,
             modules: AllModules,
             mergedExcelStyles: null,
-            defaultExcelExportParams: null
+            defaultExcelExportParams: null,
+            defaultPdfSetting: {
+                headerColor: '#f8f8f8',
+                innerBorderColor: '#dde2eb',
+                outerBorderColor: '#babfc7',
+                pageSize: 'A4',
+                oritentation: 'landscape',
+                showPageCount: true,
+                headerHeight: 25,
+                rowHeight: 15,
+                oddBackColor: '#ffffff',
+                evenBackColor: '#ffffff',
+                cellFormatting: true,
+                columnAsLinks: true,
+                onlySelectedRow: false,
+                headerContent: null,
+                footerContent: null,
+                hBorderWidth: 1,
+                vBorderWidth: 1
+            },
+            gridApi: null,
+            columnApi: null
         }
     },
     methods: {
         onGridReady(even) {
+          this.columnApi = even.columnApi
+          this.gridApi = even.api
           this.$emit('gridReady', even)
         },
         columnMoved(event) {
@@ -176,6 +203,29 @@ export default {
         },
         filterChanged(params) {
             this.$emit('filterChanged', params)
+        },
+        exportPdf() {
+            const pdfParams = {...this.defaultPdfSetting, ...this.pdfSetting}
+            const printParams = {
+                PDF_HEADER_COLOR: pdfParams.headerColor,
+                PDF_INNER_BORDER_COLOR: pdfParams.innerBorderColor,
+                PDF_OUTER_BORDER_COLOR: pdfParams.outerBorderColor,
+                PDF_PAGE_ORITENTATION: pdfParams.oritentation,
+                PDF_WITH_FOOTER_PAGE_COUNT: pdfParams.showPageCount,
+                PDF_HEADER_HEIGHT: pdfParams.headerHeight,
+                PDF_ROW_HEIGHT: pdfParams.rowHeight,
+                PDF_ODD_BKG_COLOR: pdfParams.oddBackColor,
+                PDF_EVEN_BKG_COLOR: pdfParams.evenBackColor,
+                PDF_WITH_CELL_FORMATTING: pdfParams.cellFormatting,
+                PDF_WITH_COLUMNS_AS_LINKS: pdfParams.columnAsLinks,
+                PDF_SELECTED_ROWS_ONLY: pdfParams.onlySelectedRow,
+                PDF_HEADER: pdfParams.headerContent,
+                PDF_FOOTER: pdfParams.footerContent,
+                PDF_PAGE_SIZE: pdfParams.pageSize,
+                PDF_BORDER_H_WIDTH: pdfParams.hBorderWidth,
+                PDF_BORDER_V_WIDTH: pdfParams.vBorderWidth
+            }
+            printDoc(printParams, this.gridApi, this.columnApi)
         }
     },
     beforeMount() {
