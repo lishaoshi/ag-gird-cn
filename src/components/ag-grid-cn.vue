@@ -24,6 +24,7 @@
         :detailRowHeight="detailRowHeight"
         :detailRowAutoHeight="detailRowAutoHeight"
         :isRowMaster="isRowMaster"
+        :excel-styles="mergedExcelStyles"
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @filter-modified="filterModified"
@@ -34,6 +35,7 @@
         @cellFocused="cellFocused"
         @rowClicked="rowClicked"
         @rowDoubleClicked="rowDoubleClicked"
+        @filterChanged="filterChanged"
     >
     </ag-grid-vue>
 </template>
@@ -119,6 +121,10 @@ export default {
         rowBuffer: {
             type: Number,
             default: 10
+        },
+        excelStyles: {
+            type: Object,
+            default: null
         }
     },
     watch: {
@@ -131,7 +137,8 @@ export default {
             agGirdLocal,
             columnDefs: null,
             rowData: null,
-            modules: AllModules
+            modules: AllModules,
+            mergedExcelStyles: null
         }
     },
     methods: {
@@ -164,7 +171,63 @@ export default {
         },
         rowDoubleClicked(params) {
             this.$emit('rowDoubleClicked', params)
+        },
+        filterChanged(params) {
+            this.$emit('filterChanged', params)
         }
+    },
+    beforeMount() {
+      this.mergedExcelStyles = [
+        {
+            id: 'cell',
+            alignment: { horizontal: 'Center' },
+            borders: {
+            borderBottom: {
+                color: '#000000', lineStyle: 'Continuous', weight: 1
+            },
+            borderLeft: {
+                color: '#000000', lineStyle: 'Continuous', weight: 1
+            },
+            borderRight: {
+                color: '#000000', lineStyle: 'Continuous', weight: 1
+            },
+            borderTop: {
+                color: '#000000', lineStyle: 'Continuous', weight: 1
+            }
+            }
+        }, {
+            id: 'header',
+            alignment: { horizontal: 'Center' },
+            interior: {
+            color: '#DAEEF3',
+            pattern: 'Solid'
+            },
+            borders: {
+            borderBottom: {
+                color: '#000000', lineStyle: 'Continuous', weight: 1
+            },
+            borderLeft: {
+                color: '#000000', lineStyle: 'Continuous', weight: 1
+            },
+            borderRight: {
+                color: '#000000', lineStyle: 'Continuous', weight: 1
+            },
+            borderTop: {
+                color: '#000000', lineStyle: 'Continuous', weight: 1
+            }
+            }
+        }, {
+            id: 'title',
+            alignment: { horizontal: 'Center' },
+            font: {
+            bold: true,
+            size: 14
+            }
+        }
+      ]
+      if(this.excelStyles) {
+        this.mergedExcelStyles = this.excelStyles
+      }
     }
 
 }

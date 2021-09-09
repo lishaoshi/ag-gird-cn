@@ -6,6 +6,7 @@
             :defaultColGroupDef="defaultColGroupDef"
             :columnTypes="columnTypes"
             :frameworkComponents="frameworkComponents"
+            :rowBuffer="0"
             rowHeight="30"
             domLayout="normal"
             @gridReady="onGridReady"
@@ -41,11 +42,12 @@ export default {
         this.columnDefs =[
             {
                 headerName: '序号',
+                cellClass: 'rowSort',
                 filter: false,
                 width: 70,
                 suppressMenu: true,
-                cellRenderer: (even) => {
-                    return even.rowIndex
+                valueGetter: (params) => {
+                    return `${params.node.rowIndex + 1}`
                 }
             },
             {
