@@ -25,6 +25,7 @@
         :detailRowAutoHeight="detailRowAutoHeight"
         :isRowMaster="isRowMaster"
         :excel-styles="mergedExcelStyles"
+        :defaultExcelExportParams="defaultExcelExportParams"
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @filter-modified="filterModified"
@@ -138,7 +139,8 @@ export default {
             columnDefs: null,
             rowData: null,
             modules: AllModules,
-            mergedExcelStyles: null
+            mergedExcelStyles: null,
+            defaultExcelExportParams: null
         }
     },
     methods: {
@@ -177,6 +179,14 @@ export default {
         }
     },
     beforeMount() {
+        this.defaultExcelExportParams = {
+            processCellCallback: params => {
+               if(!params.value) {
+                   return ' '
+               }
+               return params.value
+            }
+        }
       this.mergedExcelStyles = [
         {
             id: 'cell',
