@@ -27,6 +27,7 @@
         :excel-styles="mergedExcelStyles"
         :defaultExcelExportParams="defaultExcelExportParams"
         :edit-type="editType"
+        :suppress-click-edit="suppressClickEdit "
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @filter-modified="filterModified"
@@ -134,6 +135,10 @@ export default {
         },
         editType: {
             type: String,
+            default: null
+        },
+        suppressClickEdit: {
+            type: Boolean,
             default: null
         }
     },
