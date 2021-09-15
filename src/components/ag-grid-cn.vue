@@ -26,6 +26,7 @@
         :isRowMaster="isRowMaster"
         :excel-styles="mergedExcelStyles"
         :defaultExcelExportParams="defaultExcelExportParams"
+        :edit-type="editType"
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @filter-modified="filterModified"
@@ -129,6 +130,10 @@ export default {
         },
         pdfSetting: {
             type: Object,
+            default: null
+        },
+        editType: {
+            type: String,
             default: null
         }
     },
