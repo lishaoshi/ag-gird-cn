@@ -126,7 +126,7 @@ export default {
             default: 10
         },
         excelStyles: {
-            type: Object,
+            type: [Object, Array],
             default: null
         },
         pdfSetting: {
