@@ -39,6 +39,7 @@
         @rowClicked="rowClicked"
         @rowDoubleClicked="rowDoubleClicked"
         @filterChanged="filterChanged"
+        @selectionChanged="selectionChanged"
     >
     </ag-grid-vue>
 </template>
@@ -213,6 +214,9 @@ export default {
         },
         filterChanged(params) {
             this.$emit('filterChanged', params)
+        },
+        selectionChanged(params) {
+            this.$emit('selectionChanged', params)
         },
         exportPdf() {
             const pdfParams = {...this.defaultPdfSetting, ...this.pdfSetting}
