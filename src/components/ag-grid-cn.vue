@@ -28,6 +28,8 @@
         :defaultExcelExportParams="defaultExcelExportParams"
         :edit-type="editType"
         :suppress-click-edit="suppressClickEdit "
+        :pagination="pagination"
+        :pagination-page-size="paginationPageSize"
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @filter-modified="filterModified"
@@ -141,6 +143,14 @@ export default {
         suppressClickEdit: {
             type: Boolean,
             default: null
+        },
+        pagination: {
+            type: Boolean,
+            default: false
+        },
+        paginationPageSize:{
+            type:Number,
+            default: ()=> 10
         }
     },
     watch: {
