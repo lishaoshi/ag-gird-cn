@@ -30,6 +30,10 @@
         :suppress-click-edit="suppressClickEdit "
         :pagination="pagination"
         :pagination-page-size="paginationPageSize"
+        :rowModelType="rowModelType"
+        :serverSideStoreType="serverSideStoreType"
+        :cacheBlockSize="cacheBlockSize"
+        :animateRows="animateRows"
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @filter-modified="filterModified"
@@ -151,6 +155,22 @@ export default {
         paginationPageSize:{
             type:Number,
             default: ()=> 10
+        },
+        rowModelType:{
+            type:String,
+            default: ()=> null
+        },
+        serverSideStoreType:{
+            type:String,
+            default: ()=> null
+        },
+        cacheBlockSize:{
+            type:Number,
+            default: ()=> 0
+        },
+        animateRows:{
+            type:Boolean,
+            default: ()=> false
         }
     },
     watch: {
