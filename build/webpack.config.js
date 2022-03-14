@@ -2,7 +2,9 @@
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 module.exports  = {
   mode: 'production',
   entry: './src/index.js',
@@ -15,7 +17,7 @@ module.exports  = {
     // filename: '[name].[hash:7].js',
   },
 
-  module: {
+  module: { 
     rules: [
       {
         test: /\.vue$/,
@@ -46,16 +48,26 @@ module.exports  = {
   resolve: {
     extensions: ['*', '.js', '.vue', '.json'],
     // 使用的扩展名
-
+    
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, '../src')
     }
   },
+externals: [ /^@?ag-grid-.+$/, 'vue', /^pdfmake.*/],
+ optimization: {
+      minimizer: [
+        new UglifyWebpackPlugin({
+          parallel: 4
+        }),
+        new OptimizeCssAssetsWebpackPlugin()
+      ]
+  },
   devtool: false,
   plugins: [
+    //new BundleAnalyzerPlugin(),
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
     // new HtmlWebpackPlugin(
     //   {
     //     title: 'ag-table',

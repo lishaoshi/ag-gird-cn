@@ -1,19 +1,19 @@
-import pdfMake from 'pdfmake/build/pdfmake'
-import vfs from './vfs_fonts'
-pdfMake.fonts = {
-  song: {
-    normal: 'song.ttf',
-    bold: 'song.ttf',
-    italics: 'song.ttf',
-    bolditalics: 'song.ttf'
-  }
-};
 import getDocDefinition from './docDefinition'
 
 function printDoc(printParams, gridApi, columnApi) {
   const docDefinition = getDocDefinition(printParams, gridApi, columnApi)
-  docDefinition.defaultStyle = { font: 'song'}
-  pdfMake.createPdf(docDefinition,null,pdfMake.fonts,vfs).download()
+  docDefinition.defaultStyle = { font: 'SimSun'}
+  import('pdfmake/build/pdfmake').then(pdfMake=>{
+    pdfMake.fonts = {
+      SimSun: { // TODO CDN IMPORT http://lib.yunbaoguan.cn/
+        normal: 'https://sr.yunbaoguan.cn/download/externals/fonts/SimSun.ttf',
+        bold: 'https://sr.yunbaoguan.cn/download/externals/fonts/SimSun.ttf',
+        italics: 'https://sr.yunbaoguan.cn/download/externals/fonts/SimSun.ttf',
+        bolditalics: 'https://sr.yunbaoguan.cn/download/externals/fonts/SimSun.ttf'
+      }
+    };
+    pdfMake.createPdf(docDefinition,null,pdfMake.fonts).download()
+  });
 }
 
 export default printDoc
