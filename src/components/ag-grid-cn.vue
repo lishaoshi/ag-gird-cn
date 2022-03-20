@@ -36,6 +36,7 @@
         :animateRows="animateRows"
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
+        @columnResized="columnResized"
         @filter-modified="filterModified"
         @cellClicked="cellClicked"
         @cellDoubleClicked="cellDoubleClicked"
@@ -217,6 +218,9 @@ export default {
         },
         columnMoved(event) {
             this.$emit('columnMoved', event)
+        },
+        columnResized(event) {
+             this.$emit('columnResized', event)
         },
         filterModified(params) {
             this.$emit('filterModified', params)

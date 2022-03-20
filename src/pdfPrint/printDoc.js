@@ -2,8 +2,8 @@ import getDocDefinition from './docDefinition'
 
 function printDoc(printParams, gridApi, columnApi) {
   const docDefinition = getDocDefinition(printParams, gridApi, columnApi)
-  docDefinition.defaultStyle = { font: 'SimSun'}
-  import('pdfmake/build/pdfmake').then(pdfMake=>{
+  docDefinition.defaultStyle = { font: 'SimSun' }
+  import('pdfmake/build/pdfmake').then(pdfMake => {
     pdfMake.fonts = {
       SimSun: { // TODO CDN IMPORT http://lib.yunbaoguan.cn/
         normal: 'https://sr.yunbaoguan.cn/download/externals/fonts/SimSun.ttf',
@@ -12,7 +12,7 @@ function printDoc(printParams, gridApi, columnApi) {
         bolditalics: 'https://sr.yunbaoguan.cn/download/externals/fonts/SimSun.ttf'
       }
     };
-    pdfMake.createPdf(docDefinition,null,pdfMake.fonts).download()
+    pdfMake.createPdf(docDefinition, null, pdfMake.fonts).download()
   });
 }
 
