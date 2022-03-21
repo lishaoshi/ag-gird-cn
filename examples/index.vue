@@ -207,7 +207,7 @@ export default {
                 }
                 this.rowData = data.result
                 },
-                2000
+                1
             )
         }
     }

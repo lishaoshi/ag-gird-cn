@@ -37,6 +37,7 @@
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @columnResized="columnResized"
+        @dragStopped="dragStopped"
         @filter-modified="filterModified"
         @cellClicked="cellClicked"
         @cellDoubleClicked="cellDoubleClicked"
@@ -218,6 +219,9 @@ export default {
         },
         columnMoved(event) {
             this.$emit('columnMoved', event)
+        },
+        dragStopped(event) {
+            this.$emit('dragStopped', event)
         },
         columnResized(event) {
              this.$emit('columnResized', event)

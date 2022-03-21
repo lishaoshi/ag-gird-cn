@@ -7,6 +7,7 @@
             v-model="rowData"
             :columns="columnDefs"
             :defaultColGroupDef="defaultColGroupDef"
+            :default-col-def="defaultColDef"
             :columnTypes="columnTypes"
             :frameworkComponents="frameworkComponents"
             :rowBuffer="0"
@@ -15,6 +16,7 @@
             domLayout="normal"
             @gridReady="onGridReady"
             @cellEditingStarted="cellEditingStarted"
+            @dragStopped="dragStopped"
         ></ag-grid-cn>
     </div>
 </template>
@@ -39,7 +41,9 @@ export default {
             defaultColGroupDef: {
                 marryChildren: false
             },
-            defaultColDef: {},
+            defaultColDef: {
+                resizable: true
+            },
             columnTypes: null,
             frameworkComponents: {},
             gridApi: null,
@@ -213,6 +217,9 @@ export default {
         },
         exportPdf() {
             this.$refs.grid.exportPdf()
+        },
+        dragStopped(event) {
+            console.debug('dragStopped', event)
         }
     }
 
