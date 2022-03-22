@@ -1,4 +1,5 @@
 <template>
+<div style="height:100%">
     <ag-grid-vue
         row-selection="multiple"
         class="flex-grow-1 flex-shrink-1 ag-theme-balham"
@@ -50,6 +51,28 @@
         @selectionChanged="selectionChanged"
     >
     </ag-grid-vue>
+    <el-dialog
+      title="选择展示字段"
+      v-if="columnSet"
+      width="500px"
+      :visible="dialogColListShow"
+      custom-class="col-dialog"
+      top="6vh"
+      @close="dialogcolListShowClose"
+    >
+      <template>
+        <el-checkbox-group ref="columnItem" v-model="showtable" class="reportColumnItem" style="width: 10px" size="medium" :min="1" @change="handleCheckedChange">
+          <el-checkbox v-for="item in showlistdata" :key="item.field" :label="item.field">{{ item.headerName }}</el-checkbox>
+        </el-checkbox-group>
+      </template>
+      <div slot="footer">
+        <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">全选</el-checkbox>
+        <el-button type="primary" @click="dialogcolListShowClose">取消</el-button>
+        <el-button type="primary" @click="saveSelected">确定</el-button>
+      </div>
+    </el-dialog>
+</div>
+    
 </template>
 
 <script>
@@ -59,10 +82,15 @@ import { agGirdLocal } from '@/utils/reset-ag-grid-local.js'
 import { LicenseManager } from '@ag-grid-enterprise/core'
 LicenseManager.setLicenseKey(`CompanyName=Shenzhen Huitongguan Network Technology Co., Ltd,LicensedGroup=Shenzhen Huitongguan Network Technology Co., Ltd,LicenseType=MultipleApplications,LicensedConcurrentDeveloperCount=1,LicensedProductionInstancesCount=1,AssetReference=AG-017061,ExpiryDate=5_July_2022_[v2]_MTY1Njk3NTYwMDAwMA==7d62b8378360a3402254d4cd22f59109`)
 import printDoc from '../pdfPrint/printDoc'
+import { Dialog,Button,Checkbox,CheckboxGroup } from 'element-ui'
 export default {
     name: 'AgGridCn',
     components: {
-        AgGridVue
+        AgGridVue,
+        Dialog,
+        Button,
+        Checkbox,
+        CheckboxGroup
     },
     props: {
         value: {
@@ -173,6 +201,10 @@ export default {
         animateRows:{
             type:Boolean,
             default: ()=> false
+        },
+        columnSet: {
+            type:Boolean,
+            default: ()=> false
         }
     },
     watch: {
@@ -208,7 +240,12 @@ export default {
                 vBorderWidth: 1
             },
             gridApi: null,
-            columnApi: null
+            columnApi: null,
+            dialogColListShow: false,
+            checkAll: false,
+            isIndeterminate: true,
+            showlistdata: [],
+            showtable: []
         }
     },
     methods: {
@@ -221,7 +258,12 @@ export default {
             this.$emit('columnMoved', event)
         },
         dragStopped(event) {
+            const saveItems = event.columnApi.columnController.gridColumns.map(t => {
+                return { field: t.colDef.field, width: t.actualWidth, hide: !t.visible }
+            })
+            this.showtable = saveItems.map(t => t.field)
             this.$emit('dragStopped', event)
+            this.$emit('columnDrag', saveItems)
         },
         columnResized(event) {
              this.$emit('columnResized', event)
@@ -278,6 +320,39 @@ export default {
                 PDF_BORDER_V_WIDTH: pdfParams.vBorderWidth
             }
             printDoc(printParams, this.gridApi, this.columnApi)
+        },
+        openColumnSet() {
+            if(this.columnSet) {
+                this.dialogColListShow = true
+                this.showlistdata = this.columnApi.columnController.gridColumns.map(t => { return { field: t.colDef.field, headerName: t.colDef.headerName, visible: t.visible } })
+                this.showtable = this.columnApi.columnController.gridColumns.filter(t => t.visible).map(t => t.colDef.field)
+                this.isIndeterminate = this.showtable.length < this.showlistdata.length
+                this.checkAll = this.showtable.length === this.showlistdata.length
+            } else {
+                console.debug('请设置 columnSet 属性为 true')
+            }
+        },
+        dialogcolListShowClose() {
+            this.dialogColListShow = false
+        },
+        saveSelected() {
+            const columns = this.columnApi.columnController.gridColumns.map(t => {
+                return { field: t.colDef.field, width: t.actualWidth, hide: !this.showtable.find(f => f === t.colDef.field) }
+            })
+            columns.forEach(column => {
+                this.columnApi.setColumnVisible(column.field, !column.hide)
+            });
+            this.$emit('saveColumns', columns, this.showtable)
+            this.dialogcolListShowClose()
+        },
+        handleCheckedChange(value) {
+            const checkedCount = value.length
+            this.checkAll = checkedCount === this.showlistdata.length
+            this.isIndeterminate = checkedCount > 0 && checkedCount < this.showlistdata.length
+        },
+        handleCheckAllChange(val) {
+            this.showtable = val ? this.showlistdata.map(t => t.field) : []
+            this.isIndeterminate = false
         }
     },
     beforeMount() {

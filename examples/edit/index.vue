@@ -2,6 +2,7 @@
     <div class="page">
         <PrintButton :gridApi="gridApi" :columnApi="columnApi" :pageSize="'A3'" />
         <el-button @click="exportPdf">打印</el-button>
+        <el-button @click="showColumnSetting">列设置</el-button>
         <ag-grid-cn
             ref="grid"
             v-model="rowData"
@@ -12,11 +13,14 @@
             :frameworkComponents="frameworkComponents"
             :rowBuffer="0"
             :pdfSetting="pdfSetting"
+            :columnSet="true"
             rowHeight="30"
             domLayout="normal"
             @gridReady="onGridReady"
             @cellEditingStarted="cellEditingStarted"
             @dragStopped="dragStopped"
+            @saveColumns="saveColumns"
+            @columnDrag="columnDrag"
         ></ag-grid-cn>
     </div>
 </template>
@@ -220,6 +224,15 @@ export default {
         },
         dragStopped(event) {
             console.debug('dragStopped', event)
+        },
+        showColumnSetting() {
+            this.$refs.grid.openColumnSet()
+        },
+        saveColumns(columns) {
+            console.debug('saveColumns', columns)
+        },
+        columnDrag(columns) {
+            console.debug('columnDrag', columns)
         }
     }
 
