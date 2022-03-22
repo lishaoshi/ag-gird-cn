@@ -261,9 +261,9 @@ export default {
             const saveItems = event.columnApi.columnController.gridColumns.map(t => {
                 return { field: t.colDef.field, width: t.actualWidth, hide: !t.visible }
             })
-            this.showtable = saveItems.map(t => t.field)
+            this.showtable = saveItems.filter(t => !t.hide).map(t => t.field)
             this.$emit('dragStopped', event)
-            this.$emit('columnDrag', saveItems)
+            this.$emit('columnDrag', saveItems, this.showtable)
         },
         columnResized(event) {
              this.$emit('columnResized', event)
