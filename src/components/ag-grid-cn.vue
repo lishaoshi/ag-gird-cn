@@ -35,6 +35,7 @@
         :serverSideStoreType="serverSideStoreType"
         :cacheBlockSize="cacheBlockSize"
         :animateRows="animateRows"
+        :rowClassRules="rowClassRules"
         @grid-ready="onGridReady"
         @column-moved="columnMoved"
         @columnResized="columnResized"
@@ -205,6 +206,10 @@ export default {
         columnSet: {
             type:Boolean,
             default: ()=> false
+        },
+        rowClassRules: {
+            type: Object,
+            default: ()=> {}
         }
     },
     watch: {
@@ -353,7 +358,7 @@ export default {
         handleCheckAllChange(val) {
             this.showtable = val ? this.showlistdata.map(t => t.field) : []
             this.isIndeterminate = false
-        }
+        },
     },
     beforeMount() {
         this.defaultExcelExportParams = {
